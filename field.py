@@ -35,15 +35,20 @@ class Point:
 class Cell:
     """Single panel of a field"""
 
-    def __init__(self, point: Point = Point(0, 0)):
-        self.__point = point
+    def __init__(self, position: Point = Point(0, 0)):
+        self.__position = position
         self.__color = Colors.WHITE
 
     @property
     def color(self):
         return self.__color
 
+    @property
+    def position(self) -> Point:
+        return self.__position
+
     def mark(self, color: Colors) -> None:
+        print("Marking field {} with color {}".format(self.__position, color))
         self.__color = color
 
     def is_marked(self) -> bool:
@@ -79,8 +84,11 @@ class Field:
     def has_border(self) -> bool:
         return self.__has_border
 
-    def get(self, x: int, y: int) -> Cell:
+    def get_by_coords(self, x: int, y: int) -> Cell:
         return self.__panels[x][y]
+
+    def get_by_pos(self, position: Point) -> Cell:
+        return self.__panels[position.x][position.y]
 
     def __str__(self):
         string = ''

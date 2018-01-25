@@ -2,6 +2,8 @@ from enum import Enum
 
 from field import Field, Point
 
+from abc import ABC, abstractmethod
+
 
 class Direction(Enum):
     UP = 1
@@ -9,18 +11,40 @@ class Direction(Enum):
     RIGHT = 3
     LEFT = 4
 
+    def movement_x(self) -> int:
+        if self == Direction.UP:
+            return 1
+        elif self == Direction.DOWN:
+            return -1
+        else:
+            return 0
 
-class Action:
+    def movement_y(self) -> int:
+        if self == Direction.RIGHT:
+            return 1
+        elif self == Direction.LEFT:
+            return -1
+        else:
+            return 0
+
+
+# Actions
+
+class Action(ABC):
+
+    @abstractmethod
     def printable(self) -> str:
-        raise NotImplementedError
+        pass
 
 
 class NoneAction(Action):
+
     def printable(self) -> str:
         return "None"
 
 
 class MoveAction(Action):
+
     def __init__(self, direction: Direction):
         self.__direction = direction
 
@@ -48,12 +72,7 @@ class FallOffAction(Action):
         return "Falling off..."
 
 
-class Actor:
-    def act(self, options) -> Action:
-        raise NotImplementedError
-
-
-class Movable(Actor):
+class Movable(ABC):
     """Base class for everything that can move on a field"""
 
     def __init__(self, name, field: Field, initial_point: Point = Point()):
@@ -81,48 +100,40 @@ class Movable(Actor):
     def can_go_right(self) -> bool:
         return self.__position.x < self.__field.width
 
-    def go_up(self) -> Action:
-        if self.__position.x < self.__field.height:
-            return MoveAction(Direction.UP)
-        elif self.__field.has_border:
-            return BumpWallAction(Direction.UP)
-        else:
-            return FallOffAction(Direction.UP)
-
-    def go_right(self) -> Action:
-        if self.__position.y < self.__field.width:
-            return MoveAction(Direction.RIGHT)
-        elif self.__field.has_border:
-            return BumpWallAction(Direction.RIGHT)
-        else:
-            raise FallOffError(self, Direction.RIGHT)
-
-    def go_down(self) -> Action:
-        if self.__position.x > 0:
-            return MoveAction(Direction.DOWN)
-        elif self.__field.has_border:
-            return BumpWallAction(Direction.DOWN)
-        else:
-            return FallOffAction(Direction.DOWN)
-
-    def go_left(self) -> Action:
-        if self.__position.y > 0:
-            return MoveAction(Direction.LEFT)
-        elif self.__field.has_border:
-            return BumpWallAction(Direction.LEFT)
-        else:
-            return FallOffAction(Direction.LEFT)
-
-    def act(self, options) -> Action:
+    @abstractmethod
+    def save_action(self, action: Action):
         raise NotImplementedError
 
+    def __move(self, direction: Direction):
+        # Get movement in x and y direction as int in [-1, 0, 1]
+        (mov_x, mov_y) = (direction.movement_x(), direction.movement_y())
+        print("Moving from {} into direction {} with mov {}, {}".format(self.position, direction, mov_x, mov_y))
 
-class FallOffError(Exception):
-    """Exception raised if robot fell of field"""
+        # If movement is possible within field
+        mov_x_okay = (0 <= self.position.x + mov_x < self.__field.height)
+        mov_y_okay = (0 <= self.position.y + mov_y < self.__field.height)
 
-    def __init__(self, movable: Movable, direction: Direction):
-        self.robot_id = movable.name
-        self.direction = direction
+        print("{} and {}".format(mov_x_okay, mov_y_okay))
 
-    def __str__(self):
-        return "The Robot {} fell of the field while going {}".format(self.robot_id, self.direction)
+        if mov_x_okay and mov_y_okay:
+            # Update position
+            self.__position = Point(self.position.x + mov_x, self.position.y + mov_y)
+        elif self.__field.has_border:
+            # bump into wall if there are any
+            self.save_action(BumpWallAction(direction))
+        else:
+            # fall off field if there are no walls
+            self.save_action(FallOffAction(direction))
+        print("")
+
+    def go_up(self) -> None:
+        self.__move(Direction.UP)
+
+    def go_right(self) -> None:
+        self.__move(Direction.RIGHT)
+
+    def go_down(self) -> None:
+        self.__move(Direction.DOWN)
+
+    def go_left(self) -> None:
+        self.__move(Direction.LEFT)

@@ -1,5 +1,6 @@
 from field import Field, Point, Colors
-from robots import UserRobot, SampleRobot
+from sample import SampleRobot
+from solution import UserRobot
 
 exercise_options = {
     'start_x': 0,
@@ -20,8 +21,8 @@ user_robot = UserRobot('user_robot', field,
 sample_robot = SampleRobot('sample robot', field,
                            Point(exercise_options['start_x'], exercise_options['start_y']), Colors.RED)
 
-user_robot.act(exercise_options['run_options'])
-sample_robot.act(exercise_options['run_options'])
+user_robot.run(exercise_options['run_options'])
+# sample_robot.run(exercise_options['run_options'])
 
 # correct = validate(field)
 

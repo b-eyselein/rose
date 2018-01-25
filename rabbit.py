@@ -5,7 +5,7 @@ from random import randint
 
 class Rabbit(Movable):
 
-    def act(self, options) -> Action:
+    def save_action(self, options) -> Action:
         act_int = randint(0, 9)
         if act_int == 1:
             return MoveAction(Direction.LEFT)

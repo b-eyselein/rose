@@ -1,12 +1,8 @@
-from movable import Action
-from robots import SingleActorRobot
 from typing import Dict
+from robots import SingleActorRobot
 
 
 class UserRobot(SingleActorRobot):
-    def save_action(self, action: Action):
-        pass
-
     def run(self, options: Dict):
         height = options['height']
         width = options['width']

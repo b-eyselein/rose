@@ -11,6 +11,32 @@ class Colors(Enum):
     PURPLE = 6
     BLACK = 7
 
+    def __str__(self):
+        return self.name
+
+
+class Direction(Enum):
+    UP = 1
+    DOWN = 2
+    RIGHT = 3
+    LEFT = 4
+
+    def movement_x(self) -> int:
+        if self == Direction.UP:
+            return 1
+        elif self == Direction.DOWN:
+            return -1
+        else:
+            return 0
+
+    def movement_y(self) -> int:
+        if self == Direction.RIGHT:
+            return 1
+        elif self == Direction.LEFT:
+            return -1
+        else:
+            return 0
+
 
 class Point:
     """Simple point with x- and y-coordinate"""
@@ -48,7 +74,6 @@ class Cell:
         return self.__position
 
     def mark(self, color: Colors) -> None:
-        print("Marking field {} with color {}".format(self.__position, color))
         self.__color = color
 
     def is_marked(self) -> bool:

@@ -1,5 +1,5 @@
-from robots import SingleActorRobot
 from typing import Dict
+from robots import SingleActorRobot
 
 
 class SampleRobot(SingleActorRobot):

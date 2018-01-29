@@ -1,4 +1,4 @@
-from field import Field, Cell
+from base.field import Field, Cell
 
 
 def __compare_cells__(user_cell: Cell, sample_cell: Cell, mind_colors: bool) -> bool:
@@ -14,8 +14,8 @@ def __fields_equal__(user_field: Field, sample_field: Field, mind_colors: bool) 
 
     for row_index in range(user_field.height):
         for cell_index in range(user_field.width):
-            user_cell = user_field.get_by_coords(row_index, cell_index)
-            sample_cell = sample_field.get_by_coords(row_index, cell_index)
+            user_cell = user_field.get_by_coordinates(row_index, cell_index)
+            sample_cell = sample_field.get_by_coordinates(row_index, cell_index)
             if not __compare_cells__(user_cell, sample_cell, mind_colors):
                 return False
     return True

@@ -1,18 +1,6 @@
-from abc import abstractmethod
-from typing import Dict
-
-from field import *
-from movable import Action, Movable
-
-
-class MarkAction(Action):
-
-    def __init__(self, cell: Cell, color: Colors):
-        self.__cell = cell
-        self.__color = color
-
-    def __str__(self) -> str:
-        return str(self.__color)
+from base.movable import Movable
+from base.field import Field, Point, Colors
+from base.actions import MarkAction
 
 
 class Robot(Movable):
@@ -34,10 +22,3 @@ class Robot(Movable):
         cell_to_mark = self.__field.get_by_pos(self.position)
         cell_to_mark.mark(self.__color)
         self.save_action(MarkAction(cell_to_mark, self.__color))
-
-
-class SingleActorRobot(Robot):
-
-    @abstractmethod
-    def run(self, options: Dict) -> None:
-        pass

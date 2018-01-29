@@ -1,6 +1,6 @@
-from movable import Movable, Action, NoneAction, MoveAction, Direction
-
 from random import randint
+
+from base.movable import Movable, Action, NoneAction, MoveAction, Direction
 
 
 class Rabbit(Movable):

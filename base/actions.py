@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from field import Direction
+from base.field import Direction, Cell, Colors
 
 
 class Action(ABC):
@@ -43,3 +43,13 @@ class FallOffAction(Action):
 
     def __str__(self) -> str:
         return "FallOf"
+
+
+class MarkAction(Action):
+
+    def __init__(self, cell: Cell, color: Colors):
+        self.__cell = cell
+        self.__color = color
+
+    def __str__(self) -> str:
+        return str(self.__color)

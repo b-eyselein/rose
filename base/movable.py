@@ -1,11 +1,11 @@
-from typing import List
+from typing import List, Dict
+from abc import ABCMeta
+from base.actions import *
+from base.field import Direction
+from base.field import Field, Point
 
-from actions import *
-from field import Direction
-from field import Field, Point
 
-
-class Movable(ABC):
+class Movable(metaclass=ABCMeta):
     """Base class for everything that can move on a field"""
 
     def __init__(self, name, field: Field, initial_point: Point = Point()):
@@ -74,3 +74,5 @@ class Movable(ABC):
 
     def go_left(self) -> None:
         self.__move(Direction.LEFT)
+
+

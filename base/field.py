@@ -1,4 +1,5 @@
 from enum import Enum
+from abc import ABC
 
 
 class Colors(Enum):
@@ -87,7 +88,7 @@ class Cell:
 
 
 class Field:
-    """Two dimensional field of panels"""
+    """Two dimensional field of cells"""
 
     def __init__(self, height: int = 10, width: int = 10, has_border: bool = False):
         assert 0 < height < 100, 'Größe des Feldes muss zwischen 0 und 100 (jeweils exklusiv) liegen!'
@@ -109,7 +110,7 @@ class Field:
     def has_border(self) -> bool:
         return self.__has_border
 
-    def get_by_coords(self, x: int, y: int) -> Cell:
+    def get_by_coordinates(self, x: int, y: int) -> Cell:
         return self.__panels[x][y]
 
     def get_by_pos(self, position: Point) -> Cell:
@@ -129,3 +130,7 @@ class Field:
         string += ('-' * len(coordinate_x)) + '\n' + coordinate_x
 
         return string
+
+
+class FieldObject(ABC):
+    pass

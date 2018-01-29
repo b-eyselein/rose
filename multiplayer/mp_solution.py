@@ -1,16 +1,18 @@
 from typing import Dict
-from multiplayer.mp_robots import MultiPlayerRobot
+
 from base.actions import *
+from base.actors import MultiPlayerActor
+from base.robot import Robot
 
 
-class UserRobot(MultiPlayerRobot):
+class UserRobot(Robot, MultiPlayerActor):
 
     def act(self, options: Dict) -> Action:
         return NoneAction()
         pass
 
 
-class SampleRobot(MultiPlayerRobot):
+class SampleRobot(Robot, MultiPlayerActor):
 
     def act(self, options: Dict) -> Action:
         return NoneAction()

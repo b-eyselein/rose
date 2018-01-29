@@ -1,8 +1,10 @@
 from typing import Dict
-from singleplayer.sp_robots import SingleActorRobot
+
+from base.actors import SinglePlayerActor
+from base.robot import Robot
 
 
-class UserRobot(SingleActorRobot):
+class UserRobot(Robot, SinglePlayerActor):
     def run(self, options: Dict):
         height = options['height']
         width = options['width']
@@ -23,7 +25,7 @@ class UserRobot(SingleActorRobot):
             self.go_left()
 
 
-class SampleRobot(SingleActorRobot):
+class SampleRobot(Robot, SinglePlayerActor):
     def run(self, options: Dict):
         height = options['height']
         width = options['width']

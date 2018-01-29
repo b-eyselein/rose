@@ -8,12 +8,10 @@ from base.robot import Robot
 class UserRobot(Robot, MultiPlayerActor):
 
     def act(self, options: Dict) -> Action:
-        return NoneAction()
-        pass
+        return self.go_up
 
 
 class SampleRobot(Robot, MultiPlayerActor):
 
     def act(self, options: Dict) -> Action:
-        return NoneAction()
-        pass
+        return self.go_up

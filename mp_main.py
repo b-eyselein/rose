@@ -2,9 +2,10 @@ from json import dumps as json_dump
 from os import getcwd
 from typing import Dict
 
+from solution.mp_solution import UserRobot, SampleRobot
+
 from base.field import Field, Colors
 from base.field import Point
-from multiplayer.mp_solution import UserRobot, SampleRobot
 
 max_steps = 100
 

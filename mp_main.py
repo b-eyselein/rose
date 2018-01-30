@@ -1,8 +1,7 @@
 from json import dumps as json_dump
-from os import getcwd
 from typing import Dict
 
-from solution.mp_solution import UserRobot, SampleRobot
+from solution import *
 
 from base.field import Field, Colors
 from base.field import Point
@@ -53,8 +52,5 @@ if __name__ == "__main__":
         'run_options': {'height': 3, 'width': 7},
         'max_steps': 100
     }
-
-    pwd = getcwd()
-    target_dir = pwd if pwd.endswith('multiplayer') else pwd + '/multiplayer'
 
     run_robots(exercise_opts)

@@ -1,5 +1,6 @@
-from typing import List, Dict
 from abc import ABCMeta
+from typing import List
+
 from base.actions import *
 from base.field import Direction
 from base.field import Field, Point

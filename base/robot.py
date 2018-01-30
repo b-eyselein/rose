@@ -1,6 +1,6 @@
-from base.movable import Movable
-from base.field import Field, Point, Colors
 from base.actions import MarkAction
+from base.field import Field, Point, Colors
+from base.movable import Movable
 
 
 class Robot(Movable):

@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
-from base.actions import Action, NoneAction
 from typing import Dict
+
+from base.actions import Action
 
 
 class SinglePlayerActor(ABC):

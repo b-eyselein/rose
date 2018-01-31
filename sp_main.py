@@ -11,12 +11,12 @@ from sp_validation import validate
 def run_robots(exercise_options: Dict):
     sample_field = Field(exercise_options['field_height'], exercise_options['field_width'])
     sample_robot = SampleRobot('sample_robot', sample_field, exercise_options['start'], Colors.RED)
-    sample_robot.run()
+    sample_robot.run(*exercise_options['run_options'])
 
     # Inst. fields for both robots
     user_field = Field(exercise_options['field_height'], exercise_options['field_width'])
     user_robot = UserRobot('user_robot', user_field, exercise_options['start'], Colors.BLUE)
-    user_robot.run()
+    user_robot.run(*exercise_options['run_options'])
 
     result: Dict = {
         'correct': validate(user_field, sample_field),
@@ -48,7 +48,8 @@ if __name__ == "__main__":
         'field_width': 8,
         'field_height': 10,
 
-        'run_options': {'height': 3, 'width': 7},
+        #'run_options': {'width': 7, 'height': 3},
+        'run_options': [7, 3],
         'max_steps': 100
     }
 

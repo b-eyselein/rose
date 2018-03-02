@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 from json import dumps as json_dump
 from typing import Dict
 
@@ -48,7 +50,7 @@ if __name__ == "__main__":
         'field_width': 8,
         'field_height': 10,
 
-        #'run_options': {'width': 7, 'height': 3},
+        # 'run_options': {'width': 7, 'height': 3},
         'run_options': [7, 3],
         'max_steps': 100
     }

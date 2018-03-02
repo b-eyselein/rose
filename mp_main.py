@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 from json import dumps as json_dump
 from typing import Dict
 

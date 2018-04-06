@@ -1,4 +1,4 @@
-FROM python:3
+FROM python:3-alpine
 
 LABEL maintainer="b.eyselein@gmail.com"
 
@@ -11,5 +11,6 @@ WORKDIR $WorkDir
 
 COPY ./base $WorkDir/base
 COPY ./*.py $WorkDir/
+# COPY ./options.json $WorkDir/
 
 ENTRYPOINT ["bash"]

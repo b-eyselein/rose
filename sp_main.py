@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from json import dumps as json_dump
+import json
 from typing import Dict
 
 from solution import *
@@ -11,13 +11,20 @@ from sp_validation import validate
 
 
 def run_robots(exercise_options: Dict):
-    sample_field = Field(exercise_options['field_height'], exercise_options['field_width'])
-    sample_robot = SampleRobot('sample_robot', sample_field, exercise_options['start'], Colors.RED)
+    start_coordinates = exercise_options['start']
+    start = Point(start_coordinates['x'], start_coordinates['y'])
+
+    field_options = exercise_options['field']
+    field_height = field_options['height']
+    field_width = field_options['width']
+
+    sample_field = Field(field_height, field_width)
+    sample_robot = SampleRobot('sample_robot', sample_field, start, Colors.RED)
     sample_robot.run(*exercise_options['run_options'])
 
     # Inst. fields for both robots
-    user_field = Field(exercise_options['field_height'], exercise_options['field_width'])
-    user_robot = UserRobot('user_robot', user_field, exercise_options['start'], Colors.BLUE)
+    user_field = Field(field_height, field_width)
+    user_robot = UserRobot('user_robot', user_field, start, Colors.BLUE)
     user_robot.run(*exercise_options['run_options'])
 
     result: Dict = {
@@ -40,19 +47,11 @@ def run_robots(exercise_options: Dict):
 
     # Write result to json file
     with open('actions.json', 'w+') as actions_file:
-        actions_file.write(json_dump(result, indent=2))
+        actions_file.write(json.dumps(result, indent=2))
 
 
 if __name__ == "__main__":
-    exercise_opts = {
-        'start': Point(0, 0),
+    with open('options.json', 'r') as file:
+        exercise_opts = json.loads(file.read())
 
-        'field_width': 8,
-        'field_height': 10,
-
-        # 'run_options': {'width': 7, 'height': 3},
-        'run_options': [7, 3],
-        'max_steps': 100
-    }
-
-    run_robots(exercise_opts)
+        run_robots(exercise_opts)

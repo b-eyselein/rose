@@ -8,10 +8,10 @@ ARG WorkDir=/data
 # Add base files folder to python path
 ENV PYTHONPATH $WorkDir/base:$PYTHONPATH
 
+RUN pip install jsonschema
+
 WORKDIR $WorkDir
 
-COPY ./base $WorkDir/base
-COPY ./*.py $WorkDir/
-# COPY ./options.json $WorkDir/
+COPY ./ $WorkDir/
 
-ENTRYPOINT ["bash"]
+ENTRYPOINT ["./entrypoint.sh"]

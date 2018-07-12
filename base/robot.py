@@ -1,12 +1,12 @@
 from base.actions import MarkAction
-from base.field import Field, Point, Colors
+from base.field import Field, Vector2D, Colors
 from base.movable import Movable
 
 
 class Robot(Movable):
     """Robot which is operating on a field, starting on an initial point in the field. A robot can also mark a field"""
 
-    def __init__(self, robot_name: str, field: Field, initial_point: Point = Point(), color: Colors = Colors.BLACK):
+    def __init__(self, robot_name: str, field: Field, initial_point: Vector2D = Vector2D(), color: Colors = Colors.BLACK):
         super().__init__(robot_name, field, initial_point)
         self.__color = color  # Robot marks field with this color
         self.__field = field

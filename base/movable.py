@@ -3,17 +3,17 @@ from typing import List
 
 from base.actions import *
 from base.field import Direction
-from base.field import Field, Point
+from base.field import Field, Vector2D
 
 
 class Movable(metaclass=ABCMeta):
     """Base class for everything that can move on a field"""
 
-    def __init__(self, name, field: Field, initial_point: Point = Point()):
-        self.__name = name
-        self.__field = field
-        self.__initial_position = initial_point
-        self.__position = initial_point
+    def __init__(self, name: str, field: Field, initial_point: Vector2D = Vector2D()):
+        self.__name: str = name
+        self.__field: Field = field
+        self.__initial_position: Vector2D = initial_point
+        self.__position: Vector2D = initial_point
         self.__actions: List[Action] = []
 
     @property
@@ -21,11 +21,11 @@ class Movable(metaclass=ABCMeta):
         return self.__name
 
     @property
-    def initial_position(self) -> Point:
+    def initial_position(self) -> Vector2D:
         return self.__initial_position
 
     @property
-    def position(self) -> Point:
+    def position(self) -> Vector2D:
         return self.__position
 
     @property
@@ -56,7 +56,7 @@ class Movable(metaclass=ABCMeta):
         mov_y_okay = (0 <= self.position.y + mov_y < self.__field.height)
 
         if mov_x_okay and mov_y_okay:  # Update position
-            self.__position = Point(self.position.x + mov_x, self.position.y + mov_y)
+            self.__position = Vector2D(self.position.x + mov_x, self.position.y + mov_y)
             action = MoveAction(direction)
         elif self.__field.has_border:  # bump into wall if there are any
             action = BumpWallAction(direction)
@@ -75,5 +75,3 @@ class Movable(metaclass=ABCMeta):
 
     def go_left(self) -> None:
         self.__move(Direction.LEFT)
-
-

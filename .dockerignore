@@ -1,0 +1,10 @@
+.gitignore
+
+Dockerfile
+
+testdata.json
+result.json
+
+adapter.py
+sample.py
+solution.py

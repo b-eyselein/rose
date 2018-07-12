@@ -1,4 +1,3 @@
-from abc import ABC
 from enum import Enum
 
 
@@ -39,7 +38,7 @@ class Direction(Enum):
             return 0
 
 
-class Point:
+class Vector2D:
     """Simple point with x- and y-coordinate"""
 
     def __init__(self, x: int = 0, y: int = 0):
@@ -55,6 +54,9 @@ class Point:
     def y(self) -> int:
         return self.__y
 
+    def to_json(self):
+        return {"x": self.x, "y": self.y}
+
     def __str__(self):
         return "({}, {})".format(self.__x, self.__y)
 
@@ -62,7 +64,7 @@ class Point:
 class Cell:
     """Single panel of a field"""
 
-    def __init__(self, position: Point = Point(0, 0)):
+    def __init__(self, position: Vector2D = Vector2D(0, 0)):
         self.__position = position
         self.__color = Colors.WHITE
 
@@ -71,7 +73,7 @@ class Cell:
         return self.__color
 
     @property
-    def position(self) -> Point:
+    def position(self) -> Vector2D:
         return self.__position
 
     def mark(self, color: Colors) -> None:
@@ -96,7 +98,7 @@ class Field:
         self.__height = height
         self.__width = width
         self.__has_border = has_border
-        self.__panels = [[Cell(Point(x, y)) for x in range(width)] for y in range(height)]
+        self.__panels = [[Cell(Vector2D(x, y)) for x in range(width)] for y in range(height)]
 
     @property
     def height(self) -> int:
@@ -113,7 +115,7 @@ class Field:
     def get_by_coordinates(self, x: int, y: int) -> Cell:
         return self.__panels[x][y]
 
-    def get_by_pos(self, position: Point) -> Cell:
+    def get_by_pos(self, position: Vector2D) -> Cell:
         return self.__panels[position.x][position.y]
 
     def __str__(self):
@@ -130,7 +132,3 @@ class Field:
         string += ('-' * len(coordinate_x)) + '\n' + coordinate_x
 
         return string
-
-
-class FieldObject(ABC):
-    pass

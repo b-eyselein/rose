@@ -1,5 +1,4 @@
 .idea/
 __pycache__/
-actions.txt
 
-**/actions.json
+**/result.json

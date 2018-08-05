@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import argparse
 import json
 from typing import List
 
@@ -11,6 +12,7 @@ from base.testdata import TestData, load_test_data
 from base.validation import validate
 from sample import run_robot as sample_run
 from solution import run_robot as user_run
+from visualize import visualize
 
 
 def run_robots(cur_test_data: TestData) -> RoseResult:
@@ -25,12 +27,17 @@ def run_robots(cur_test_data: TestData) -> RoseResult:
     user_robot = Robot('user_robot', user_field, cur_test_data.start, Colors.BLUE)
     adapt_run(user_robot, cur_test_data.run_options, user_run)
 
-    return RoseResult(id=cur_test_data.id, correct=validate(user_field, sample_field), start=cur_test_data.start,
+    return RoseResult(result_id=cur_test_data.id, correct=validate(user_field, sample_field),
+                      start=cur_test_data.start, field_size=field_options,
                       sample_result=RobotResult(sample_robot.name, sample_robot.actions),
                       user_result=RobotResult(user_robot.name, user_robot.actions))
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="TODO!")
+    parser.add_argument('--visualize', dest='visualize', default=False, action='store_true')
+    args = parser.parse_args()
+
     with open('testdata.json', 'r') as file, open('result.json', 'w') as actions_file:
 
         test_data_list: List[TestData] = load_test_data(json.loads(file.read()))
@@ -40,4 +47,7 @@ if __name__ == "__main__":
         for test_data in test_data_list:
             results.append(run_robots(test_data))
 
-        actions_file.write(json.dumps(list(map(lambda x: x.to_json(), results)), indent=2))
+        actions_file.write(json.dumps(list(map(lambda x: x.to_json(), results))))
+
+        if args.visualize:
+            visualize(results)

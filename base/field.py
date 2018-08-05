@@ -2,14 +2,14 @@ from enum import Enum
 
 
 class Colors(Enum):
-    WHITE = 0
-    RED = 1
-    ORANGE = 2
-    YELLOW = 3
-    GREEN = 4
-    BLUE = 5
-    PURPLE = 6
-    BLACK = 7
+    WHITE = '#ffffff'
+    RED = '#ff0000'
+    ORANGE = '#ff9933'
+    YELLOW = '#ffff00'
+    GREEN = '#00ff00'
+    BLUE = '#0000ff'
+    PURPLE = '#6600cc'
+    BLACK = '#000000'
 
     def __str__(self):
         return self.name
@@ -21,7 +21,7 @@ class Direction(Enum):
     RIGHT = 3
     LEFT = 4
 
-    def movement_x(self) -> int:
+    def movement_y(self) -> int:
         if self == Direction.UP:
             return 1
         elif self == Direction.DOWN:
@@ -29,7 +29,7 @@ class Direction(Enum):
         else:
             return 0
 
-    def movement_y(self) -> int:
+    def movement_x(self) -> int:
         if self == Direction.RIGHT:
             return 1
         elif self == Direction.LEFT:

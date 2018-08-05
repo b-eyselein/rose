@@ -51,5 +51,9 @@ class MarkAction(Action):
         self.__cell = cell
         self.__color = color
 
+    @property
+    def color(self) -> Colors:
+        return self.__color
+
     def __str__(self) -> str:
         return str(self.__color)

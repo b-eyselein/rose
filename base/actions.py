@@ -11,7 +11,6 @@ class Action(ABC):
 
 
 class NoneAction(Action):
-
     def __str__(self) -> str:
         return "None"
 
@@ -19,14 +18,14 @@ class NoneAction(Action):
 class MoveAction(Action):
 
     def __init__(self, direction: Direction):
-        self.__direction = direction
+        self.__direction__ = direction
 
     @property
     def direction(self) -> Direction:
-        return self.__direction
+        return self.__direction__
 
     def __str__(self) -> str:
-        return str(self.__direction.name)
+        return str(self.__direction__.name)
 
 
 class BumpWallAction(MoveAction):
@@ -35,11 +34,11 @@ class BumpWallAction(MoveAction):
 
 class FallOffAction(Action):
     def __init__(self, direction: Direction):
-        self.__direction = direction
+        self.__direction__ = direction
 
     @property
     def direction(self) -> Direction:
-        return self.__direction
+        return self.__direction__
 
     def __str__(self) -> str:
         return "FallOf"
@@ -48,8 +47,8 @@ class FallOffAction(Action):
 class MarkAction(Action):
 
     def __init__(self, cell: Cell, color: Colors):
-        self.__cell = cell
-        self.__color = color
+        self.__cell__ = cell
+        self.__color__ = color
 
     def __str__(self) -> str:
-        return str(self.__color)
+        return str(self.__color__)

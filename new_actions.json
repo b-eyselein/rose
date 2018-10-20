@@ -1,0 +1,7 @@
+{"correct": false, "start": {"x": 0, "y": 0}, "sample": {
+  "name": "sample_robot", "actions_size": 32, "actions": [
+    "RED", "UP", "RED", "UP", "RED", "UP", "RED", "UP", "RED", "UP", "RED", "UP", "RED", "RIGHT", "RED", "RIGHT", "RED",
+    "DOWN", "RED", "DOWN", "RED", "DOWN", "RED", "DOWN", "RED", "DOWN", "RED", "DOWN", "RED", "LEFT", "RED", "LEFT"
+  ]
+}, "user": {"name": "user_robot", "actions_size": 0, "actions": []}
+}

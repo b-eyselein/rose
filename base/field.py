@@ -44,41 +44,41 @@ class Point:
 
     def __init__(self, x: int = 0, y: int = 0):
         assert x >= 0 and y >= 0, "Beide Koordinaten eines Punktes müssen größer als 0 sein!"
-        self.__x = x
-        self.__y = y
+        self.__x__ = x
+        self.__y__ = y
 
     @property
     def x(self) -> int:
-        return self.__x
+        return self.__x__
 
     @property
     def y(self) -> int:
-        return self.__y
+        return self.__y__
 
     def __str__(self):
-        return "({}, {})".format(self.__x, self.__y)
+        return "({}, {})".format(self.__x__, self.__y__)
 
 
 class Cell:
     """Single panel of a field"""
 
     def __init__(self, position: Point = Point(0, 0)):
-        self.__position = position
-        self.__color = Colors.WHITE
+        self.__position__ = position
+        self.__color__ = Colors.WHITE
 
     @property
     def color(self):
-        return self.__color
+        return self.__color__
 
     @property
     def position(self) -> Point:
-        return self.__position
+        return self.__position__
 
     def mark(self, color: Colors) -> None:
-        self.__color = color
+        self.__color__ = color
 
     def is_marked(self) -> bool:
-        return self.__color != Colors.WHITE
+        return self.__color__ != Colors.WHITE
 
     def __str__(self):
         if self.is_marked():
@@ -92,41 +92,41 @@ class Field:
 
     def __init__(self, height: int = 10, width: int = 10, has_border: bool = False):
         assert 0 < height < 100, 'Größe des Feldes muss zwischen 0 und 100 (jeweils exklusiv) liegen!'
-        assert 0 < width < 100, 'Breite des Feldes muss  zwischen 0 und 100 (jeweils exklusiv liegen!'
-        self.__height = height
-        self.__width = width
-        self.__has_border = has_border
-        self.__panels = [[Cell(Point(x, y)) for x in range(width)] for y in range(height)]
+        assert 0 < width < 100, 'Breite des Feldes muss  zwischen 0 und 100 (jeweils exklusiv) liegen!'
+        self.__height__ = height
+        self.__width__ = width
+        self.__has_border__ = has_border
+        self.__panels__ = [[Cell(Point(x, y)) for x in range(width)] for y in range(height)]
 
     @property
     def height(self) -> int:
-        return self.__height
+        return self.__height__
 
     @property
     def width(self) -> int:
-        return self.__width
+        return self.__width__
 
     @property
     def has_border(self) -> bool:
-        return self.__has_border
+        return self.__has_border__
 
     def get_by_coordinates(self, x: int, y: int) -> Cell:
-        return self.__panels[x][y]
+        return self.__panels__[x][y]
 
     def get_by_pos(self, position: Point) -> Cell:
-        return self.__panels[position.x][position.y]
+        return self.__panels__[position.x][position.y]
 
     def __str__(self):
         string = ''
-        for row_index, row in enumerate(self.__panels[::-1]):
+        for row_index, row in enumerate(self.__panels__[::-1]):
             row_string = ''
 
             for cell in row:
                 row_string += str(cell)
 
-            string += "{:3d} | ".format(self.__height - row_index) + row_string + '\n'
+            string += "{:3d} | ".format(self.__height__ - row_index) + row_string + '\n'
 
-        coordinate_x = '    | ' + ''.join(map(lambda w: "{:^3d}".format(w + 1), range(self.__width)))
+        coordinate_x = '    | ' + ''.join(map(lambda w: "{:^3d}".format(w + 1), range(self.__width__)))
         string += ('-' * len(coordinate_x)) + '\n' + coordinate_x
 
         return string

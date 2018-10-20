@@ -10,8 +10,7 @@ ENV PYTHONPATH $WorkDir/base:$PYTHONPATH
 
 WORKDIR $WorkDir
 
-COPY ./base $WorkDir/base
-COPY ./*.py $WorkDir/
-# COPY ./options.json $WorkDir/
+COPY . $WorkDir/
 
-ENTRYPOINT ["bash"]
+ENTRYPOINT ./sp_main.py
+#["sh"]

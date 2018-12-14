@@ -1,7 +1,7 @@
 from abc import ABCMeta
 from typing import List
 
-from base.actions import Action, MoveAction, BumpWallAction, FallOffAction, MarkAction, NoneAction
+from base.actions import Action, MoveAction, BumpWallAction, FallOffAction
 from base.field import Direction
 from base.field import Field, Point
 
@@ -33,13 +33,13 @@ class Movable(metaclass=ABCMeta):
         return self.__actions__
 
     def can_go_up(self) -> bool:
-        return self.__position__.x < self.__field__.height
+        return self.__position__.y < self.__field__.height
 
     def can_go_down(self) -> bool:
-        return self.__position__.x > 0
+        return self.__position__.y > 0
 
     def can_go_left(self) -> bool:
-        return self.__position__.y > 0
+        return self.__position__.x > 0
 
     def can_go_right(self) -> bool:
         return self.__position__.x < self.__field__.width

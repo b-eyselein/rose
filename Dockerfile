@@ -13,4 +13,3 @@ WORKDIR $WorkDir
 COPY . $WorkDir/
 
 ENTRYPOINT ./sp_main.py
-#["sh"]

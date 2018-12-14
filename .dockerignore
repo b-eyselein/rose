@@ -11,6 +11,6 @@ README.md
 __pycache__/
 base/__pycache__/
 
-solution.py
+solution_robot.py
 options.json
 actions.json

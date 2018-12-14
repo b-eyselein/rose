@@ -2,4 +2,7 @@
 __pycache__/
 actions.txt
 
+**/new_actions.json
 **/actions.json
+
+.mypy_cache

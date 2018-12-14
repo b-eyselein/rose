@@ -1,7 +1,7 @@
 from abc import ABCMeta
 from typing import List
 
-from base.actions import *
+from base.actions import Action, MoveAction, BumpWallAction, FallOffAction, MarkAction, NoneAction
 from base.field import Direction
 from base.field import Field, Point
 
@@ -75,5 +75,3 @@ class Movable(metaclass=ABCMeta):
 
     def go_left(self) -> None:
         self.__move__(Direction.LEFT)
-
-

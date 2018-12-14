@@ -3,8 +3,10 @@
 import json
 from typing import Dict
 
-from solution import *
+from solution_robot import UserRobot
+from sample_robot import SampleRobot
 
+from base.robot import Robot
 from base.field import Field, Colors
 from base.field import Point
 from sp_validation import validate

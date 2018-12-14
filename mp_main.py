@@ -3,7 +3,8 @@
 from json import dumps as json_dump
 from typing import Dict
 
-from solution import *
+from solution_robot import UserRobot
+from sample_robot import SampleRobot
 
 from base.field import Field, Colors
 from base.field import Point

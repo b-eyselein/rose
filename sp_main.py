@@ -1,14 +1,12 @@
 #!/usr/bin/env python3
 
-import json
+from json import loads as json_loads, dumps as json_dumps
 from typing import Dict
 
-from solution_robot import UserRobot
-from sample_robot import SampleRobot
-
+from base.field import Field, Colors, Point
 from base.robot import Robot
-from base.field import Field, Colors
-from base.field import Point
+from sample_robot import run_sample_robot
+from solution_robot import run_user_robot
 from sp_validation import validate
 
 
@@ -28,13 +26,13 @@ def run_robots(exercise_options: Dict):
     field_height: int = int(field_options['height'])
     field_width: int = int(field_options['width'])
 
-    sample_field = Field(field_height, field_width)
-    sample_robot = SampleRobot('sample_robot', sample_field, start, Colors.RED)
-    sample_robot.run(*exercise_options['run_options'])
+    sample_field: Field = Field(field_height, field_width)
+    sample_robot: Robot = Robot('sample_robot', sample_field, start, Colors.RED)
+    run_sample_robot(sample_robot, *exercise_options['run_options'])
 
-    user_field = Field(field_height, field_width)
-    user_robot = UserRobot('user_robot', user_field, start, Colors.BLUE)
-    user_robot.run(*exercise_options['run_options'])
+    user_field: Field = Field(field_height, field_width)
+    user_robot: Robot = Robot('user_robot', user_field, start, Colors.BLUE)
+    run_user_robot(user_robot, *exercise_options['run_options'])
 
     result: Dict = {
         'correct': validate(user_field, sample_field),
@@ -48,11 +46,11 @@ def run_robots(exercise_options: Dict):
 
     # Write result to json file
     with open('actions.json', 'w+') as actions_file:
-        actions_file.write(json.dumps(result))
+        actions_file.write(json_dumps(result))
 
 
 if __name__ == "__main__":
     with open('options.json', 'r') as file:
-        exercise_opts = json.loads(file.read())
+        exercise_opts = json_loads(file.read())
 
         run_robots(exercise_opts)

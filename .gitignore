@@ -6,3 +6,5 @@ actions.txt
 **/actions.json
 
 .mypy_cache
+
+venv/

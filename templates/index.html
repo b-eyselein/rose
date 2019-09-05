@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <p>TODO!</p>
+
+    <canvas id="mainCanvas" width="500" height="500"></canvas>
+
+    <hr>
+
+    {% if exercises %}
+        <label for="exSelect">Aufgabe:</label>
+        <select id="exSelect" name="exSelect">
+            {% for exercise in exercises %}
+                <option>{{ exercise }}</option>
+            {% endfor %}
+        </select>
+    {% endif %}
+
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
+{% endblock %}

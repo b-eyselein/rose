@@ -1,10 +1,10 @@
 from abc import ABC, abstractmethod
+from dataclasses import dataclass
 
 from base.field import Direction, Cell, Colors
 
 
 class Action(ABC):
-
     @abstractmethod
     def __str__(self) -> str:
         pass
@@ -15,40 +15,38 @@ class NoneAction(Action):
         return "None"
 
 
+@dataclass()
 class MoveAction(Action):
-
-    def __init__(self, direction: Direction):
-        self.__direction__ = direction
+    _direction: Direction
 
     @property
     def direction(self) -> Direction:
-        return self.__direction__
+        return self._direction
 
     def __str__(self) -> str:
-        return str(self.__direction__.name)
+        return str(self._direction.name)
 
 
 class BumpWallAction(MoveAction):
     pass
 
 
+@dataclass()
 class FallOffAction(Action):
-    def __init__(self, direction: Direction):
-        self.__direction__ = direction
+    _direction: Direction
 
     @property
     def direction(self) -> Direction:
-        return self.__direction__
+        return self._direction
 
     def __str__(self) -> str:
         return "FallOf"
 
 
+@dataclass()
 class MarkAction(Action):
-
-    def __init__(self, cell: Cell, color: Colors):
-        self.__cell__ = cell
-        self.__color__ = color
+    _cell: Cell
+    _color: Colors
 
     def __str__(self) -> str:
-        return str(self.__color__)
+        return str(self._color)

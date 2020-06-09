@@ -6,29 +6,51 @@ function domReady(callback: () => void): void {
     }
 }
 
-const FIELD_COUNT_X: number = 10;
-const FIELD_COUNT_Y: number = 10;
+interface ExerciseOptions {
+    field: {
+        height: number;
+        width: number;
+    }
+    start: {
+        x: number;
+        y: number;
+    }
+    run_options: number[];
+}
 
-domReady(() => {
-    const mainCanvas: HTMLCanvasElement = document.querySelector('#mainCanvas');
-    const ctx = mainCanvas.getContext("2d");
+function loadExerciseOptions(exerciseName: string): void {
+    fetch(`/${exerciseName}/options`)
+        .then((response) => response.json())
+        .then((exerciseOptions: ExerciseOptions) => drawField(exerciseOptions));
+}
 
-    const drawWidth = mainCanvas.width;
-    const drawHeight = mainCanvas.height;
+function drawField(exerciseOptions: ExerciseOptions): void {
+    const mainCanvas = document.querySelector<HTMLCanvasElement>('#mainCanvas');
+    const ctx: CanvasRenderingContext2D = mainCanvas.getContext("2d");
 
-    const fieldWidthX = drawWidth / FIELD_COUNT_X;
-    const fieldWidthY = drawWidth / FIELD_COUNT_Y;
+    const drawWidth: number = mainCanvas.width;
+    const drawHeight: number = mainCanvas.height;
 
-    for (let i = 1; i < FIELD_COUNT_X; i++) {
+    const fieldWidthX: number = drawWidth / exerciseOptions.field.height;
+    const fieldWidthY: number = drawWidth / exerciseOptions.field.width;
+
+    ctx.lineWidth = 1;
+
+    for (let i = 1; i < exerciseOptions.field.height; i++) {
         ctx.moveTo(i * fieldWidthX, 0);
         ctx.lineTo(i * fieldWidthX, drawHeight);
         ctx.stroke();
     }
 
-    for(let i = 1; i < FIELD_COUNT_Y; i++) {
+    for (let i = 1; i < exerciseOptions.field.width; i++) {
         ctx.moveTo(0, i * fieldWidthY);
-        ctx.lineTo(drawWidth, i* fieldWidthY);
+        ctx.lineTo(drawWidth, i * fieldWidthY);
         ctx.stroke();
     }
+}
 
+domReady(() => {
+    const exerciseName: string = document.querySelector<HTMLInputElement>('#exerciseName').value;
+
+    loadExerciseOptions(exerciseName);
 });

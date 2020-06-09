@@ -1,5 +1,5 @@
-flask == 1.0.3
+flask
 
-flask-socketio == 4.1.0
+flask-socketio
 
-docker == 4.0.2
+docker

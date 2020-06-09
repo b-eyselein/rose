@@ -1,4 +1,4 @@
-FROM python@sha256:abc2a66d8ce0ddf14b1d51d4c1fe83f21059fa1c4952c02116cb9fd8d5cfd5c4
+FROM python:3-alpine
 
 LABEL maintainer="b.eyselein@gmail.com"
 

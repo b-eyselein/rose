@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1 class="has-text-centered">Aufgabe &quot;{{ exercise_name }}&quot;</h1>
+
+    <input hidden id="exerciseName" value="{{ exercise_name }}" title="hidden">
+
+    <canvas id="mainCanvas" width="1000" height="1000"></canvas>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
+{% endblock %}
